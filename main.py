@@ -49,9 +49,22 @@ def done(update: Update, context: CallbackQuery):
     data = query.data
     chat_id = query.message.chat_id
     message_id = query.message.message_id
+    uid_text = 'آموزش ارسال UID'
+    uid_but = [
+            [InlineKeyboardButton(text=uid_text, callback_data="uid")]
+        ]
     if data == "done":
         text = "حالا UID صرافی رو برای ربات بفرست تا لینک کانال مسابقه برات ارسال بشه."
-        context.bot.editMessageText(text=text, chat_id=chat_id, message_id=message_id)
+        context.bot.editMessageText(text=text, chat_id=chat_id, message_id=message_id, reply_markup = InlineKeyboardMarkup(uid_but))
+    elif data == "uid":
+        uid_help = 'طبق عکسای بالا برو جلو و UID یا همون عدد هشت رقمی رو برای ربات بفرست'
+        photo1 = open('src/UID1.PNG', 'rb')
+        photo2 = open('src/UID2.PNG', 'rb')
+        context.bot.sendPhoto(chat_id=chat_id, photo=photo1)
+        context.bot.sendPhoto(chat_id=chat_id, photo=photo2)
+        context.bot.sendMessage(chat_id=chat_id, text= uid_help)
+
+
 
 def check(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
