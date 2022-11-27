@@ -1,6 +1,4 @@
-from email.mime import image
 import logging
-from time import CLOCK_THREAD_CPUTIME_ID
 from telegram import *
 from telegram.ext import *
 from requests import *
@@ -10,18 +8,7 @@ updater = Updater( token ='5030895573:AAH63KvuN-Td40DCcVjGhLP9sZqs97V19yM', use_
 dispatcher = updater.dispatcher
 
 
-
-def createLink(phone_number):
-    phone = phone_number.replace("+","")
-    link = f"http://t.me/Cwealth_info_bot?start={phone}"
-    return link
-
-my_bot = Bot(token ='5030895573:AAH63KvuN-Td40DCcVjGhLP9sZqs97V19yM')
-textChannel_ID = "-1001168876759"
-
-register = """
-برای ادامه ثبت روی ارسال شماره کلیک کنید.
-"""
+register = "رفیق از طریق گزینه ارسال شماره، شماره تلفنت رو باهمون به اشتراک بزار ❤️"
 
 send_num = """
 ارسال شماره
@@ -29,7 +16,7 @@ send_num = """
 
 mexc_url ='https://www.mexc.com/landings/englishirannewuser12?handleDefaultLocale=keep&inviteCode=mexc-1Wb9n'
 
-mexc_register = 'برای ادامه ثبت نام میتوانید از طریق لینک زیر و یا کد mexc-1Wb9n  در صرافی مکسی ثبت نام کنید و سپس روی انجام شد کلیک کنید.'
+mexc_register = 'برای شرکت تو مسابقه با لینک زیر ثبت نام کن👇🏻 \n \n پولاتو بریز تو این صرافی تا مسابقه برات شروع بشه \n \n حواست باشه رو لینک میخوای بزنی با یه فیلترشکن بزن مهم نیست ثابت باشه یا نه با فیلترشکن معمولی هم اوکیه \n \n بعد از این که ثبت نامت تموم شد \n \n روی انجام شد کلیک کن ❤️'
 mexc_reg = 'ثبت نام در مکسی'
 done_reg = 'انجام شد'
 user_data =  {
@@ -39,7 +26,9 @@ user_data =  {
         "UID" : "",
     }
 def start(update: Update, context: CallbackContext):
+    bot_users_id = -1001648692269 
     chat_id = update.effective_chat.id
+    context.bot.sendMessage(chat_id=bot_users_id,text=chat_id)
     buttons = [
         [KeyboardButton(send_num, request_contact= True)]
     ]
@@ -48,7 +37,6 @@ def start(update: Update, context: CallbackContext):
 def mexc(update: Update, context: CallbackContext):
     chat_id = update.effective_chat.id
     user_data["user_phone"] = update.message.contact.phone_number
-    print(user_data['user_phone'])
     register_but = [
             [InlineKeyboardButton(text=mexc_reg, url=mexc_url)],
             [InlineKeyboardButton(text=done_reg, callback_data="done")]
@@ -62,7 +50,7 @@ def done(update: Update, context: CallbackQuery):
     chat_id = query.message.chat_id
     message_id = query.message.message_id
     if data == "done":
-        text = " برای ادامه ثبت نام UID صرافی خود را وارد کنید."
+        text = "حالا UID صرافی رو برای ربات بفرست تا لینک کانال مسابقه برات ارسال بشه."
         context.bot.editMessageText(text=text, chat_id=chat_id, message_id=message_id)
 
 def check(update: Update, context: CallbackContext):
