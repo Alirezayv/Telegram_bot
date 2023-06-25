@@ -4,7 +4,7 @@ from telegram.ext import *
 from requests import *
 
 
-updater = Updater( token ='5030895573:AAH63KvuN-Td40DCcVjGhLP9sZqs97V19yM', use_context=True)
+updater = Updater( token ='Token', use_context=True)
 dispatcher = updater.dispatcher
 
 
